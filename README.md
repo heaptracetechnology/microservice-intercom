@@ -1,5 +1,5 @@
 # Intercom as a microservice
-An OMG service for Intercom, it allows to push messaging to multiple device
+An OMG service for Intercom, it allows to messaging interaction with client app
 
 [![Open Microservice Guide](https://img.shields.io/badge/OMG-enabled-brightgreen.svg?style=for-the-badge)](https://microservice.guide)
 
@@ -28,7 +28,7 @@ $ omg run createuser -a user_id=<USER_ID> -a email=<EMAIL_ADDRESS> -a phone=<PHO
 ```
 ##### Example
 ```sh
-$ omg run createuser -a user_id="002" -a email="testing@demo.com" -a phone=7896541230 -a name="User Name" -a custom_attributes='{"NewCust":"Creating new customer"}' -a companies='["abc"]' -e ACCESS_TOKEN=<ACCESS_TOKEN>
+$ omg run createuser -a user_id="001" -a email="testing@demo.com" -a phone=7896541230 -a name="User Name" -a custom_attributes='{"NewCust":"Creating new customer"}' -a companies='["abc"]' -e ACCESS_TOKEN=<ACCESS_TOKEN>
 ```
 
 ## License
