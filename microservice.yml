@@ -56,54 +56,21 @@ actions:
       type: object
       contentType: application/json
       properties:
-        ok:
-          help: The status of operation
-          type: boolean
-  sendbyemail:
-    help: Send message by email
-    http:
-      port: 3000
-      method: post
-      path: /sendmessagebyemail
-      contentType: application/json
-    #arguments:
-      # user_id:
-      #   type: string
-      #   in: requestBody
-      #   required: true
-      #   help: A unique string identifier for the user. It is required on creation if an email is not supplied
-      # email:
-      #   type: string
-      #   in: requestBody
-      #   required: true
-      #   help: The user's email address. It is required on creation if a user_id is not supplied.
-      # phone:
-      #   type: string
-      #   in: requestBody
-      #   required: false
-      #   help: The user's phone number.
-      # name:
-      #   type: string
-      #   in: requestBody
-      #   required: false
-      #   help: The user's full name
-      # custom_attributes:
-      #   type: map
-      #   in: requestBody
-      #   required: false
-      #   help: A hash of key/value pairs containing any other data about the user you want Intercom to store
-      # companies:
-      #   type: list
-      #   in: requestBody
-      #   required: false
-      #   help: Identifies the companies this user belongs to.
-    output:
-      type: object
-      contentType: application/json
-      properties:
-        ok:
-          help: The status of operation
-          type: boolean
+        id:
+          help: The ID generated from this operation
+          type: string
+        email:
+          help: The user email address
+          type: string
+        phone:
+          help: The user phone number
+          type: string
+        name:
+          help: The user name
+          type: string
+        custom_attributes:
+          help: The custom attributes provided at the time of creating user
+          type: map
 environment:
   ACCESS_TOKEN:
     type: string
