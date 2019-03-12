@@ -5,7 +5,7 @@ lifecycle:
 info:
   version: 1.0.0
   title: Intercom
-  description: This is a intercom service
+  description: This is an intercom service
   contact:
     name: Rohit Shetty
     url: https://github.com/ht68rohit
@@ -71,6 +71,129 @@ actions:
         custom_attributes:
           help: The custom attributes provided at the time of creating user
           type: map
+  email_message:
+    help: Send message by email
+    http:
+      port: 3000
+      method: post
+      path: /emailmessage
+      contentType: application/json
+    arguments:
+      # template:
+      #   type: enum
+      #   enum:
+      #   - NO_TEMPLATE
+      #   - PERSONAL_TEMPLATE
+      #   - PLAIN_TEMPLATE
+      #   in: requestBody
+      #   required: true
+      #   help: Set templete for message
+      from:
+        type: int
+        in: requestBody
+        required: false
+        help: The object of sender with ID, Email, Type and UserID
+      to:
+        type: string
+        in: requestBody
+        required: false
+        help: The object of reciver with ID (Admin ID), Email, Type and UserID
+      subject:
+        type: string
+        in: requestBody
+        required: false
+        help: The subject of message
+      body:
+        type: string
+        in: requestBody
+        required: false
+        help: The body of message
+    output:
+      type: object
+      contentType: application/json
+      properties:
+        message_type:
+          help: The type of message (email)
+          type: string
+        id:
+          help: The ID of operation
+          type: string
+        owner:
+          help: The object of owner details
+          type: object
+        body:
+          help: The message body
+          type: string
+  inapp_message:
+    help: Send message by inapp
+    http:
+      port: 3000
+      method: post
+      path: /inappmessage
+      contentType: application/json
+    arguments:
+      from:
+        type: int
+        in: requestBody
+        required: false
+        help: The object of sender with ID (Admin ID), Email, Type and UserID
+      to:
+        type: string
+        in: requestBody
+        required: true
+        help: The object of reciver with ID, Email, Type and UserID
+      body:
+        type: string
+        in: requestBody
+        required: true
+        help: The body of message
+    output:
+      type: object
+      contentType: application/json
+      properties:
+        message_type:
+          help: The type of message (inapp)
+          type: string
+        id:
+          help: The ID of operation
+          type: string
+        owner:
+          help: The object of owner details
+          type: object
+        body:
+          help: The message body
+          type: string
+  user_message:
+    help: Send message by user
+    http:
+      port: 3000
+      method: post
+      path: /usermessage
+      contentType: application/json
+    arguments:
+      email:
+        type: string
+        in: requestBody
+        required: true
+        help: The object of sender with Email
+      body:
+        type: string
+        in: requestBody
+        required: true
+        help: The body of message
+    output:
+      type: object
+      contentType: application/json
+      properties:
+        id:
+          help: The ID of operation
+          type: string
+        owner:
+          help: The object of owner details
+          type: object
+        body:
+          help: The message body
+          type: string
 environment:
   ACCESS_TOKEN:
     type: string

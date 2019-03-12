@@ -23,6 +23,24 @@ var routes = Routes{
         "/createuser",
         messaging.CreateUser,
     },
+    Route{
+        "SendInAppMessage",
+        "POST",
+        "/inappmessage",
+        messaging.SendInAppMessage,
+    },
+    Route{
+        "SendEmailMessage",
+        "POST",
+        "/emailmessage",
+        messaging.SendEmailMessage,
+    },
+    Route{
+        "SendUserMessage",
+        "POST",
+        "/usermessage",
+        messaging.SendUserMessage,
+    },
 }
 
 func NewRouter() *mux.Router {
