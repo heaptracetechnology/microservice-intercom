@@ -2,7 +2,8 @@
 An OMG service for Intercom, it allows to messaging interaction with client app
 
 [![Open Microservice Guide](https://img.shields.io/badge/OMG-enabled-brightgreen.svg?style=for-the-badge)](https://microservice.guide)
-
+[![Build Status](https://travis-ci.com/heaptracetechnology/microservice-intercom.svg?branch=master)](https://travis-ci.com/heaptracetechnology/microservice-intercom)
+[![codecov](https://codecov.io/gh/heaptracetechnology/microservice-intercom/branch/master/graph/badge.svg)](https://codecov.io/gh/heaptracetechnology/microservice-intercom)
 
 ## [OMG](hhttps://microservice.guide) CLI
 
