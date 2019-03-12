@@ -2,7 +2,6 @@ package messaging
 
 import (
 	"encoding/json"
-	"fmt"
 	result "github.com/heaptracetechnology/microservice-intercom/result"
 	intercom "gopkg.in/intercom/intercom-go.v2"
 	"net/http"
