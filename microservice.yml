@@ -88,8 +88,8 @@ actions:
       #   in: requestBody
       #   required: true
       #   help: Set templete for message
-      from:
-        type: int
+      user_id:
+        type: string
         in: requestBody
         required: false
         help: The object of sender with ID, Email, Type and UserID

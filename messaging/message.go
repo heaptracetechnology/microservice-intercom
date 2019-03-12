@@ -2,6 +2,7 @@ package messaging
 
 import (
 	"encoding/json"
+	"fmt"
 	result "github.com/heaptracetechnology/microservice-intercom/result"
 	intercom "gopkg.in/intercom/intercom-go.v2"
 	"net/http"
@@ -11,6 +12,7 @@ import (
 type Message struct {
 	Subject string      `json:"subject,omitempty"`
 	Body    string      `json:"body,omitempty"`
+	UserID  string      `json:"user_id,omitempty"`
 	From    json.Number `json:"from,omitempty"`
 	To      string      `json:"to,omitempty"`
 	Email   string      `json:"email,omitempty"`
@@ -68,16 +70,7 @@ func SendEmailMessage(responseWriter http.ResponseWriter, request *http.Request)
 	var param *Message
 	err := decoder.Decode(&param)
 
-	// msg := intercom.NewEmailMessage(intercom.PLAIN_TEMPLATE, intercom.Admin{ID: "3026870"},
-	// 	intercom.User{Email: param.To}, param.Subject, param.Body)
-	// savedMessage, err := ic.Messages.Save(&msg)
-	// if err != nil {
-	// 	result.WriteErrorResponse(responseWriter, err)
-	// 	return
-	// }
-
-	msg := intercom.NewEmailMessage(intercom.PERSONAL_TEMPLATE, intercom.User{UserID: "001"},
-		intercom.User{Email: "rohit68.ht@gmail.com"}, "NewEmailSubject", "NewEmailBody")
+	msg := intercom.NewEmailMessage(intercom.PERSONAL_TEMPLATE, intercom.User{UserID: param.UserID}, intercom.User{Email: param.To}, param.Subject, param.Body)
 	savedMessage, err := ic.Messages.Save(&msg)
 	if err != nil {
 		result.WriteErrorResponse(responseWriter, err)
