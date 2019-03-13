@@ -37,7 +37,7 @@ $ omg run inapp_message -a from=<ADMIN_ID> -a to=<RECIVER_EMAIL> -a body=<MESSAG
 ```
 ##### Send Email message
 ```sh
-$ omg run email_message -a user_id=<USER_ID> -a to=<RECIVER_EMAIL> -a subject=<EMAIL_SUBJECT> -a body=<MESSAGE_BODY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
+$ omg run email_message -a user_id=<USER_ID> -a subject=<EMAIL_SUBJECT> -a body=<MESSAGE_BODY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
 ```
 ##### Send User message
 ```sh

@@ -93,11 +93,6 @@ actions:
         in: requestBody
         required: true
         help: The object of sender with ID, Email, Type and UserID
-      to:
-        type: string
-        in: requestBody
-        required: true
-        help: The object of reciver with ID (Admin ID), Email, Type and UserID
       subject:
         type: string
         in: requestBody

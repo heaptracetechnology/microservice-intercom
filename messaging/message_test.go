@@ -136,7 +136,6 @@ var _ = Describe("Intercom messaging, send through Email with all required data"
 
 	var message Message
 	message.UserID = "001"
-	message.To = "test2@example.com"
 	message.Subject = "Test case subject"
 	message.Body = "Test case body for email"
 
