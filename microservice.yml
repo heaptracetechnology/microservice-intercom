@@ -92,7 +92,12 @@ actions:
         type: string
         in: requestBody
         required: true
-        help: The object of sender with ID, Email, Type and UserID
+        help: The user id that is created
+      to:
+        type: string
+        in: requestBody
+        required: true
+        help: The email address of user to send the message
       subject:
         type: string
         in: requestBody
@@ -131,12 +136,12 @@ actions:
         type: int
         in: requestBody
         required: true
-        help: The object of sender with ID (Admin ID), Email, Type and UserID
+        help: The form argument will be Admin ID
       to:
         type: string
         in: requestBody
         required: true
-        help: The object of reciver with ID, Email, Type and UserID
+        help: The email address of reciver
       body:
         type: string
         in: requestBody
