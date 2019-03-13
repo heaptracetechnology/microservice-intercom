@@ -17,7 +17,7 @@ type User struct {
 	Name   string `json:"name"`
 }
 
-var _ = Describe("Intercom Create User", func() {
+var _ = Describe("Intercom Create User with all required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
@@ -43,7 +43,7 @@ var _ = Describe("Intercom Create User", func() {
 	})
 })
 
-var _ = Describe("Intercom Create User", func() {
+var _ = Describe("Intercom Create User without required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
@@ -69,7 +69,7 @@ var _ = Describe("Intercom Create User", func() {
 	})
 })
 
-var _ = Describe("Intercom messaging, send through InApp", func() {
+var _ = Describe("Intercom messaging, send through InApp with all required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
@@ -99,7 +99,7 @@ var _ = Describe("Intercom messaging, send through InApp", func() {
 	})
 })
 
-var _ = Describe("Intercom messaging, send through InApp", func() {
+var _ = Describe("Intercom messaging, send through InApp without required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
@@ -128,7 +128,7 @@ var _ = Describe("Intercom messaging, send through InApp", func() {
 	})
 })
 
-var _ = Describe("Intercom messaging, send through Email", func() {
+var _ = Describe("Intercom messaging, send through Email with all required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
@@ -159,7 +159,7 @@ var _ = Describe("Intercom messaging, send through Email", func() {
 	})
 })
 
-var _ = Describe("Intercom messaging, send through Email", func() {
+var _ = Describe("Intercom messaging, send through Email without required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
@@ -188,7 +188,7 @@ var _ = Describe("Intercom messaging, send through Email", func() {
 	})
 })
 
-var _ = Describe("Intercom messaging, send through User", func() {
+var _ = Describe("Intercom messaging, send through User with all required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
@@ -217,7 +217,7 @@ var _ = Describe("Intercom messaging, send through User", func() {
 	})
 })
 
-var _ = Describe("Intercom messaging, send through User", func() {
+var _ = Describe("Intercom messaging, send through User without required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
