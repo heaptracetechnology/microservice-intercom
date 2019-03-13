@@ -91,22 +91,22 @@ actions:
       user_id:
         type: string
         in: requestBody
-        required: false
+        required: true
         help: The object of sender with ID, Email, Type and UserID
       to:
         type: string
         in: requestBody
-        required: false
+        required: true
         help: The object of reciver with ID (Admin ID), Email, Type and UserID
       subject:
         type: string
         in: requestBody
-        required: false
+        required: true
         help: The subject of message
       body:
         type: string
         in: requestBody
-        required: false
+        required: true
         help: The body of message
     output:
       type: object
@@ -135,7 +135,7 @@ actions:
       from:
         type: int
         in: requestBody
-        required: false
+        required: true
         help: The object of sender with ID (Admin ID), Email, Type and UserID
       to:
         type: string
