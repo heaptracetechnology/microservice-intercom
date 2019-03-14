@@ -18,6 +18,16 @@ type User struct {
 	Name   string `json:"name"`
 }
 
+type MessageTest struct {
+	Subject string      `json:"subject,omitempty"`
+	Body    string      `json:"body,omitempty"`
+	UserID  string      `json:"user_id,omitempty"`
+	From    json.Number `json:"from,omitempty"`
+	To      string      `json:"to,omitempty"`
+	Email   string      `json:"email,omitempty"`
+	DecErr  string      `json:"decerr,omitempty"`
+}
+
 var _ = Describe("Intercom Create User with all required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
@@ -26,9 +36,9 @@ var _ = Describe("Intercom Create User with all required data", func() {
 
 	user := User{UserID: "777", Email: "demot636@gmail.com", Phone: "1234567890", Name: "Testcase User11"}
 	requestBody := new(bytes.Buffer)
-	err := json.NewEncoder(requestBody).Encode(user)
-	if err != nil {
-		log.Fatal(err)
+	errr := json.NewEncoder(requestBody).Encode(user)
+	if errr != nil {
+		log.Fatal(errr)
 	}
 
 	request, err := http.NewRequest("POST", "/createuser", requestBody)
@@ -56,9 +66,9 @@ var _ = Describe("Intercom Create User without required data", func() {
 
 	user := User{Phone: "1234567890", Name: "Testcase User22"}
 	requestBody := new(bytes.Buffer)
-	err := json.NewEncoder(requestBody).Encode(user)
-	if err != nil {
-		log.Fatal(err)
+	errr := json.NewEncoder(requestBody).Encode(user)
+	if errr != nil {
+		log.Fatal(errr)
 	}
 
 	request, err := http.NewRequest("POST", "/createuser", requestBody)
@@ -90,9 +100,9 @@ var _ = Describe("Intercom messaging, send through InApp with all required data"
 	message.Body = "Test case body for inapp"
 
 	requestBody := new(bytes.Buffer)
-	err := json.NewEncoder(requestBody).Encode(message)
-	if err != nil {
-		log.Fatal(err)
+	errr := json.NewEncoder(requestBody).Encode(message)
+	if errr != nil {
+		log.Fatal(errr)
 	}
 
 	request, err := http.NewRequest("POST", "/inappmessage", requestBody)
@@ -123,7 +133,10 @@ var _ = Describe("Intercom messaging, send through InApp without required data",
 	message.To = "test1@example.com"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(message)
+	errr := json.NewEncoder(requestBody).Encode(message)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/inappmessage", requestBody)
 	if err != nil {
@@ -155,7 +168,10 @@ var _ = Describe("Intercom messaging, send through Email with all required data"
 	message.Body = "Test case body for email"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(message)
+	errr := json.NewEncoder(requestBody).Encode(message)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/emailmessage", requestBody)
 	if err != nil {
@@ -185,7 +201,10 @@ var _ = Describe("Intercom messaging, send through Email without required data",
 	message.Body = "Test case body for email"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(message)
+	errr := json.NewEncoder(requestBody).Encode(message)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/emailmessage", requestBody)
 	if err != nil {
@@ -215,7 +234,10 @@ var _ = Describe("Intercom messaging, send through User with all required data",
 	message.Body = "Test case body for email"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(message)
+	errr := json.NewEncoder(requestBody).Encode(message)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/usermessage", requestBody)
 	if err != nil {
@@ -240,11 +262,15 @@ var _ = Describe("Intercom messaging, send through User without required data", 
 
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
-	var message Message
+	var message MessageTest
 	message.Body = "Test case body for email"
+	message.DecErr = "qqqqqqqqqqqqqqqqqqqqq"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(message)
+	errr := json.NewEncoder(requestBody).Encode(message)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/usermessage", requestBody)
 	if err != nil {
