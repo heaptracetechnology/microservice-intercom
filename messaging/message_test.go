@@ -18,16 +18,6 @@ type User struct {
 	Name   string `json:"name"`
 }
 
-type MessageTest struct {
-	Subject string      `json:"subject,omitempty"`
-	Body    string      `json:"body,omitempty"`
-	UserID  string      `json:"user_id,omitempty"`
-	From    json.Number `json:"from,omitempty"`
-	To      string      `json:"to,omitempty"`
-	Email   string      `json:"email,omitempty"`
-	DecErr  string      `json:"decerr,omitempty"`
-}
-
 var _ = Describe("Intercom Create User with all required data", func() {
 
 	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
@@ -262,9 +252,8 @@ var _ = Describe("Intercom messaging, send through User without required data", 
 
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
-	var message MessageTest
+	var message Message
 	message.Body = "Test case body for email"
-	message.DecErr = "qqqqqqqqqqqqqqqqqqqqq"
 
 	requestBody := new(bytes.Buffer)
 	errr := json.NewEncoder(requestBody).Encode(message)

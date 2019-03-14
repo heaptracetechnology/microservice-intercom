@@ -27,7 +27,11 @@ func CreateUser(responseWriter http.ResponseWriter, request *http.Request) {
 	decoder := json.NewDecoder(request.Body)
 
 	var param *intercom.User
-	err := decoder.Decode(&param)
+	decodeErr := decoder.Decode(&param)
+	if decodeErr != nil {
+		result.WriteErrorResponse(responseWriter, decodeErr)
+		return
+	}
 
 	savedUser, err := ic.Users.Save(param)
 	if err != nil {
@@ -47,7 +51,11 @@ func SendInAppMessage(responseWriter http.ResponseWriter, request *http.Request)
 
 	decoder := json.NewDecoder(request.Body)
 	var param *Message
-	err := decoder.Decode(&param)
+	decodeErr := decoder.Decode(&param)
+	if decodeErr != nil {
+		result.WriteErrorResponse(responseWriter, decodeErr)
+		return
+	}
 
 	msg := intercom.NewInAppMessage(intercom.Admin{ID: param.From}, intercom.Contact{Email: param.To}, param.Body)
 	savedMessage, err := ic.Messages.Save(&msg)
@@ -69,7 +77,11 @@ func SendEmailMessage(responseWriter http.ResponseWriter, request *http.Request)
 
 	decoder := json.NewDecoder(request.Body)
 	var param *Message
-	err := decoder.Decode(&param)
+	decodeErr := decoder.Decode(&param)
+	if decodeErr != nil {
+		result.WriteErrorResponse(responseWriter, decodeErr)
+		return
+	}
 
 	msg := intercom.NewEmailMessage(intercom.PERSONAL_TEMPLATE, intercom.User{UserID: param.UserID}, intercom.User{Email: param.To}, param.Subject, param.Body)
 	savedMessage, err := ic.Messages.Save(&msg)
@@ -91,7 +103,11 @@ func SendUserMessage(responseWriter http.ResponseWriter, request *http.Request) 
 
 	decoder := json.NewDecoder(request.Body)
 	var param *Message
-	err := decoder.Decode(&param)
+	decodeErr := decoder.Decode(&param)
+	if decodeErr != nil {
+		result.WriteErrorResponse(responseWriter, decodeErr)
+		return
+	}
 
 	msg := intercom.NewUserMessage(intercom.User{Email: param.Email}, param.Body)
 	savedMessage, err := ic.Messages.Save(&msg)
