@@ -53,7 +53,7 @@ func SendInAppMessage(responseWriter http.ResponseWriter, request *http.Request)
 
 	decoder := json.NewDecoder(request.Body)
 	var param *Message
-	err := decoder.Decode(&param)
+	decoder.Decode(&param)
 
 	msg := intercom.NewInAppMessage(intercom.Admin{ID: param.From}, intercom.Contact{Email: param.To}, param.Body)
 	savedMessage, err := ic.Messages.Save(&msg)

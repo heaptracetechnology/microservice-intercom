@@ -26,7 +26,10 @@ var _ = Describe("Intercom Create User with all required data", func() {
 
 	user := User{UserID: "777", Email: "demot636@gmail.com", Phone: "1234567890", Name: "Testcase User11"}
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(user)
+	err := json.NewEncoder(requestBody).Encode(user)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	request, err := http.NewRequest("POST", "/createuser", requestBody)
 	if err != nil {
@@ -53,7 +56,10 @@ var _ = Describe("Intercom Create User without required data", func() {
 
 	user := User{Phone: "1234567890", Name: "Testcase User22"}
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(user)
+	err := json.NewEncoder(requestBody).Encode(user)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	request, err := http.NewRequest("POST", "/createuser", requestBody)
 	if err != nil {
@@ -84,7 +90,10 @@ var _ = Describe("Intercom messaging, send through InApp with all required data"
 	message.Body = "Test case body for inapp"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(message)
+	err := json.NewEncoder(requestBody).Encode(message)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	request, err := http.NewRequest("POST", "/inappmessage", requestBody)
 	if err != nil {

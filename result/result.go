@@ -2,6 +2,7 @@ package result
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 )
 
@@ -13,5 +14,8 @@ func WriteErrorResponse(responseWriter http.ResponseWriter, err error) {
 func WriteJsonResponse(responseWriter http.ResponseWriter, bytes []byte, statusCode int) {
 	responseWriter.WriteHeader(statusCode)
 	responseWriter.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	responseWriter.Write(bytes)
+	_, err := responseWriter.Write(bytes)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
