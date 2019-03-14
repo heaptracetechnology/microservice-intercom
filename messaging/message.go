@@ -2,6 +2,7 @@ package messaging
 
 import (
 	"encoding/json"
+	"fmt"
 	result "github.com/heaptracetechnology/microservice-intercom/result"
 	intercom "gopkg.in/intercom/intercom-go.v2"
 	"net/http"
@@ -25,8 +26,15 @@ func CreateUser(responseWriter http.ResponseWriter, request *http.Request) {
 	ic := intercom.NewClient(accessToken, "")
 
 	decoder := json.NewDecoder(request.Body)
+	fmt.Println("decoder :::", decoder)
+
 	var param *intercom.User
-	err := decoder.Decode(&param)
+	errr := decoder.Decode(&param)
+	if errr != nil {
+		result.WriteErrorResponse(responseWriter, errr)
+		return
+	}
+
 	savedUser, err := ic.Users.Save(param)
 	if err != nil {
 		result.WriteErrorResponse(responseWriter, err)

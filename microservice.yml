@@ -12,7 +12,7 @@ info:
     email: rohits@heaptrace.com
   license:
     name: MIT
-    url: https://opensource.org/licenses/MIT 
+    url: https://opensource.org/licenses/MIT
 actions:
   createuser:
     help: Create new user

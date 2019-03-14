@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -29,6 +30,7 @@ var _ = Describe("Intercom Create User with all required data", func() {
 
 	request, err := http.NewRequest("POST", "/createuser", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(CreateUser)
@@ -55,6 +57,7 @@ var _ = Describe("Intercom Create User without required data", func() {
 
 	request, err := http.NewRequest("POST", "/createuser", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(CreateUser)
@@ -85,6 +88,7 @@ var _ = Describe("Intercom messaging, send through InApp with all required data"
 
 	request, err := http.NewRequest("POST", "/inappmessage", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(SendInAppMessage)
@@ -114,6 +118,7 @@ var _ = Describe("Intercom messaging, send through InApp without required data",
 
 	request, err := http.NewRequest("POST", "/inappmessage", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(SendInAppMessage)
@@ -136,7 +141,7 @@ var _ = Describe("Intercom messaging, send through Email with all required data"
 
 	var message Message
 	message.UserID = "001"
-	message.To = "demot636@gmail.com"
+	message.To = "test2example.com"
 	message.Subject = "Test case subject"
 	message.Body = "Test case body for email"
 
@@ -145,6 +150,7 @@ var _ = Describe("Intercom messaging, send through Email with all required data"
 
 	request, err := http.NewRequest("POST", "/emailmessage", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(SendEmailMessage)
@@ -174,6 +180,7 @@ var _ = Describe("Intercom messaging, send through Email without required data",
 
 	request, err := http.NewRequest("POST", "/emailmessage", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(SendEmailMessage)
@@ -203,6 +210,7 @@ var _ = Describe("Intercom messaging, send through User with all required data",
 
 	request, err := http.NewRequest("POST", "/usermessage", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(SendUserMessage)
@@ -231,6 +239,7 @@ var _ = Describe("Intercom messaging, send through User without required data", 
 
 	request, err := http.NewRequest("POST", "/usermessage", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(SendUserMessage)
