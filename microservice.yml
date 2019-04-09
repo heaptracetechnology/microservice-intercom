@@ -141,7 +141,7 @@ actions:
         type: string
         in: requestBody
         required: true
-        help: The email address of reciver
+        help: The email address of receiver
       body:
         type: string
         in: requestBody
