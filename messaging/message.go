@@ -2,10 +2,11 @@ package messaging
 
 import (
 	"encoding/json"
-	result "github.com/heaptracetechnology/microservice-intercom/result"
-	intercom "gopkg.in/intercom/intercom-go.v2"
 	"net/http"
 	"os"
+
+	result "github.com/heaptracetechnology/microservice-intercom/result"
+	intercom "gopkg.in/intercom/intercom-go.v2"
 )
 
 type Message struct {
@@ -20,6 +21,7 @@ type Message struct {
 //Create User
 func CreateUser(responseWriter http.ResponseWriter, request *http.Request) {
 
+	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
@@ -45,6 +47,7 @@ func CreateUser(responseWriter http.ResponseWriter, request *http.Request) {
 //InApp Messaage
 func SendInAppMessage(responseWriter http.ResponseWriter, request *http.Request) {
 
+	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
@@ -71,6 +74,7 @@ func SendInAppMessage(responseWriter http.ResponseWriter, request *http.Request)
 //Email Message
 func SendEmailMessage(responseWriter http.ResponseWriter, request *http.Request) {
 
+	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
@@ -97,6 +101,7 @@ func SendEmailMessage(responseWriter http.ResponseWriter, request *http.Request)
 //User Message
 func SendUserMessage(responseWriter http.ResponseWriter, request *http.Request) {
 
+	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
