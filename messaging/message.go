@@ -74,7 +74,6 @@ func SendInAppMessage(responseWriter http.ResponseWriter, request *http.Request)
 //Email Message
 func SendEmailMessage(responseWriter http.ResponseWriter, request *http.Request) {
 
-	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
@@ -101,7 +100,6 @@ func SendEmailMessage(responseWriter http.ResponseWriter, request *http.Request)
 //User Message
 func SendUserMessage(responseWriter http.ResponseWriter, request *http.Request) {
 
-	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
