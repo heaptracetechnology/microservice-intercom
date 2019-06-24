@@ -18,13 +18,18 @@ type User struct {
 	Name   string `json:"name"`
 }
 
-var _ = Describe("Intercom Create User with all required data", func() {
+var (
+	accessToken = os.Getenv("INTERCOM_ACCESS_TOKEN")
+	email       = os.Getenv("INTERCOM_EMAIL")
+	adminID     = os.Getenv("INTERCOM_ADMIN_ID")
+	userID      = os.Getenv("INTERCOM_USER_ID")
+)
 
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
+var _ = Describe("Intercom Create User with all required data", func() {
 
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
-	user := User{UserID: "777", Email: "demot636@gmail.com", Phone: "1234567890", Name: "Testcase User11"}
+	user := User{UserID: "777", Email: email, Phone: "1234567890", Name: "Testcase User"}
 	requestBody := new(bytes.Buffer)
 	errr := json.NewEncoder(requestBody).Encode(user)
 	if errr != nil {
@@ -50,11 +55,9 @@ var _ = Describe("Intercom Create User with all required data", func() {
 
 var _ = Describe("Intercom Create User without required data", func() {
 
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
-
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
-	user := User{Phone: "1234567890", Name: "Testcase User22"}
+	user := User{Phone: "1234567890", Name: "Testcase User"}
 	requestBody := new(bytes.Buffer)
 	errr := json.NewEncoder(requestBody).Encode(user)
 	if errr != nil {
@@ -80,13 +83,11 @@ var _ = Describe("Intercom Create User without required data", func() {
 
 var _ = Describe("Intercom messaging, send through InApp with all required data", func() {
 
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
-
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
 	var message Message
-	message.From = "3021666"
-	message.To = "demot636@gmail.com"
+	message.From = json.Number(adminID)
+	message.To = email
 	message.Body = "Test case body for inapp"
 
 	requestBody := new(bytes.Buffer)
@@ -114,13 +115,11 @@ var _ = Describe("Intercom messaging, send through InApp with all required data"
 
 var _ = Describe("Intercom messaging, send through InApp without required data", func() {
 
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
-
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
 	var message Message
-	message.From = "3026231"
-	message.To = "test1@example.com"
+	message.From = json.Number(adminID)
+	message.To = email
 
 	requestBody := new(bytes.Buffer)
 	errr := json.NewEncoder(requestBody).Encode(message)
@@ -147,13 +146,11 @@ var _ = Describe("Intercom messaging, send through InApp without required data",
 
 var _ = Describe("Intercom messaging, send through Email with all required data", func() {
 
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
-
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
 	var message Message
-	message.UserID = "001"
-	message.To = "test2example.com"
+	message.UserID = userID
+	message.To = email
 	message.Subject = "Test case subject"
 	message.Body = "Test case body for email"
 
@@ -181,8 +178,6 @@ var _ = Describe("Intercom messaging, send through Email with all required data"
 })
 
 var _ = Describe("Intercom messaging, send through Email without required data", func() {
-
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
@@ -215,12 +210,10 @@ var _ = Describe("Intercom messaging, send through Email without required data",
 
 var _ = Describe("Intercom messaging, send through User with all required data", func() {
 
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
-
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
 	var message Message
-	message.Email = "demot636@gmail.com"
+	message.Email = email
 	message.Body = "Test case body for email"
 
 	requestBody := new(bytes.Buffer)
@@ -247,8 +240,6 @@ var _ = Describe("Intercom messaging, send through User with all required data",
 })
 
 var _ = Describe("Intercom messaging, send through User without required data", func() {
-
-	accessToken := "dG9rOmE5MjMwNDFhX2JhNjZfNDEyYl9iZDkyXzRhNDIxYTFkYzU5MToxOjA="
 
 	os.Setenv("ACCESS_TOKEN", accessToken)
 
