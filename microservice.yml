@@ -14,7 +14,7 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
 actions:
-  createuser:
+  createUser:
     help: Create new user
     http:
       port: 3000
@@ -22,7 +22,7 @@ actions:
       path: /createuser
       contentType: application/json
     arguments:
-      user_id:
+      userId:
         type: string
         in: requestBody
         required: true
@@ -42,16 +42,11 @@ actions:
         in: requestBody
         required: false
         help: The user's full name
-      custom_attributes:
+      customAttributes:
         type: map
         in: requestBody
         required: false
         help: A hash of key/value pairs containing any other data about the user you want Intercom to store
-      companies:
-        type: list
-        in: requestBody
-        required: false
-        help: Identifies the companies this user belongs to.
     output:
       type: object
       contentType: application/json
@@ -71,7 +66,7 @@ actions:
         custom_attributes:
           help: The custom attributes provided at the time of creating user
           type: map
-  email_message:
+  emailMessage:
     help: Send message by email
     http:
       port: 3000
@@ -88,7 +83,7 @@ actions:
       #   in: requestBody
       #   required: true
       #   help: Set templete for message
-      user_id:
+      userId:
         type: string
         in: requestBody
         required: true
@@ -124,7 +119,7 @@ actions:
         body:
           help: The message body
           type: string
-  inapp_message:
+  inappMessage:
     help: Send message by inapp
     http:
       port: 3000
@@ -163,7 +158,7 @@ actions:
         body:
           help: The message body
           type: string
-  user_message:
+  userMessage:
     help: Send message by user
     http:
       port: 3000

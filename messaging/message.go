@@ -2,40 +2,49 @@ package messaging
 
 import (
 	"encoding/json"
-	"net/http"
-	"os"
-
 	result "github.com/heaptracetechnology/microservice-intercom/result"
 	intercom "gopkg.in/intercom/intercom-go.v2"
+	"net/http"
+	"os"
 )
 
 type Message struct {
-	Subject string      `json:"subject,omitempty"`
-	Body    string      `json:"body,omitempty"`
-	UserID  string      `json:"user_id,omitempty"`
-	From    json.Number `json:"from,omitempty"`
-	To      string      `json:"to,omitempty"`
-	Email   string      `json:"email,omitempty"`
+	Subject          string                 `json:"subject,omitempty"`
+	Body             string                 `json:"body,omitempty"`
+	UserID           string                 `json:"userId,omitempty"`
+	From             json.Number            `json:"from,omitempty"`
+	To               string                 `json:"to,omitempty"`
+	Email            string                 `json:"email,omitempty"`
+	Phone            string                 `json:"phone,omitempty"`
+	Name             string                 `json:"name,omitempty"`
+	CustomAttributes map[string]interface{} `json:"customAttributes,omitempty"`
 }
 
-//Create User
+//CreateUser
 func CreateUser(responseWriter http.ResponseWriter, request *http.Request) {
 
-	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
 
 	decoder := json.NewDecoder(request.Body)
 
-	var param *intercom.User
-	decodeErr := decoder.Decode(&param)
+	var req Message
+	decodeErr := decoder.Decode(&req)
 	if decodeErr != nil {
 		result.WriteErrorResponse(responseWriter, decodeErr)
 		return
 	}
 
-	savedUser, err := ic.Users.Save(param)
+	param := intercom.User{
+		UserID:           req.UserID,
+		Email:            req.Email,
+		Name:             req.Name,
+		Phone:            req.Phone,
+		CustomAttributes: req.CustomAttributes,
+	}
+
+	savedUser, err := ic.Users.Save(&param)
 	if err != nil {
 		result.WriteErrorResponse(responseWriter, err)
 		return
@@ -47,7 +56,6 @@ func CreateUser(responseWriter http.ResponseWriter, request *http.Request) {
 //InApp Messaage
 func SendInAppMessage(responseWriter http.ResponseWriter, request *http.Request) {
 
-	responseWriter.Header().Set("Content-Type", "application/json")
 	var accessToken = os.Getenv("ACCESS_TOKEN")
 
 	ic := intercom.NewClient(accessToken, "")
