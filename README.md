@@ -1,63 +1,147 @@
-# _Intercom_ OMG Microservice
+# _Intercom_ Open Microservice
 
-[![Open Microservice Guide](https://img.shields.io/badge/OMG%20Enabled-👍-green.svg?)](https://microservice.guide)
-[![Build Status](https://travis-ci.com/omg-services/intercom.svg?branch=master)](https://travis-ci.com/omg-services/intercom)
-[![codecov](https://codecov.io/gh/omg-services/intercom/branch/master/graph/badge.svg)](https://codecov.io/gh/omg-services/intercom)
+> This is an intercom service
 
+[![Open Microservice Specification Version](https://img.shields.io/badge/Open%20Microservice-1.0-477bf3.svg)](https://openmicroservices.org)
+[![Open Microservices Spectrum Chat](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/open-microservices)
+[![Open Microservices Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md)
+[![Open Microservices Commitzen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-An OMG service for Intercom, it allows to messaging interaction with client app
+## Introduction
 
-## Direct usage in [Storyscript](https://storyscript.io/):
+This project is an example implementation of the [Open Microservice Specification](https://openmicroservices.org), a standard
+originally created at [Storyscript](https://storyscript.io) for building highly-portable "microservices" that expose the
+events, actions, and APIs inside containerized software.
 
-##### Create and save user
-```coffee
->>> intercom createUser userId:'userID' email:'emailAddress' phone:'phoneNumber' name:'userName' customAttributes:'customAttributes'
-{"id": "operationID","email": "userEmail","phone": "phoneNumber","user_id": "userID","anonymous": false,"name": "userName","avatar": {"type": "avatar"},"custom_attributes": {"custom": "attributes"}}
+## Getting Started
+
+The `oms` command-line interface allows you to interact with Open Microservices. If you're interested in creating an Open
+Microservice the CLI also helps validate, test, and debug your `oms.yml` implementation!
+
+See the [oms-cli](https://github.com/microservices/oms) project to learn more!
+
+### Installation
+
 ```
-##### Send InApp message
-```coffee
->>> intercom inappMessage from:'adminID' to:'receiverEmail' body:'messageBody'
-{"message_type": "inapp","id": "ID","owner": {"ownerDetails"},"body": "messageBody"}
-```
-##### Send Email message
-```coffee
->>> intercom emailMessage userId:'userID' to:'receiverEmail' subject:'emailSubject' body:'messageBody'
-{"message_type": "email","id": "ID","owner": {"ownerDetails"},"subject": "emailSubject","body": "messageBody"}
-```
-##### Send User message
-```coffee
->>> intercom userMessage -a email:'senderEmail' body:'messageBody'
-{"message_type": "inapp","id": "ID","owner": {"ownerDetails"},"body": "messageBody"}
+npm install -g @microservices/oms
 ```
 
-Curious to [learn more](https://docs.storyscript.io/)?
+## Usage
 
-✨🍰✨
+### Open Microservices CLI Usage
 
-## Usage with [OMG CLI](https://www.npmjs.com/package/omg)
+Once you have the [oms-cli](https://github.com/microservices/oms) installed, you can run any of the following commands from
+within this project's root directory:
 
-##### Create and save user
+#### Actions
+
+##### createUser
+
+> Create new user
+
+##### Action Arguments
+
+| Argument Name    | Type     | Required | Default | Description                                                                                     |
+| :--------------- | :------- | :------- | :------ | :---------------------------------------------------------------------------------------------- |
+| userId           | `string` | `true`   | None    | A unique string identifier for the user. It is required on creation if an email is not supplied |
+| email            | `string` | `true`   | None    | The user's email address. It is required on creation if a user_id is not supplied.              |
+| phone            | `string` | `false`  | None    | The user's phone number.                                                                        |
+| name             | `string` | `false`  | None    | The user's full name                                                                            |
+| customAttributes | `map`    | `false`  | None    | A hash of key/value pairs containing any other data about the user you want Intercom to store   |
+| ACCESS_TOKEN     | `string` | `true`   | None    | Access token for intercom                                                                       |
+
 ```shell
-$ omg run createUser -a userId=<USER_ID> -a email=<EMAIL_ADDRESS> -a phone=<PHONE_NUMBER> -a name=<USER_NAME> -a customAttributes=<CUSTOM_ATTRIBUTES> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Example
-```shell
-$ omg run createUser -a userId="001" -a email="testing@demo.com" -a phone=7896541230 -a name="User Name" -a custom_attributes='{"NewCust":"Creating new customer"}' -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Send InApp message
-```shell
-$ omg run inappMessage -a from=<ADMIN_ID> -a to=<RECIVER_EMAIL> -a body=<MESSAGE_BODY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Send Email message
-```shell
-$ omg run emailMessage -a userId=<USER_ID> -a to=<RECIVER_EMAIL> -a subject=<EMAIL_SUBJECT> -a body=<MESSAGE_BODY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
-```
-##### Send User message
-```sh
-$ omg run userMessage -a email=<SENDER_EMAIL> -a body=<MESSAGE_BODY> -e ACCESS_TOKEN=<ACCESS_TOKEN>
+oms run createUser \
+    -a userId='*****' \
+    -a email='*****' \
+    -a phone='*****' \
+    -a name='*****' \
+    -a customAttributes='*****' \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
 ```
 
-**Note**: The OMG CLI requires [Docker](https://docs.docker.com/install/) to be installed.
+##### emailMessage
 
-## License
-[MIT License](https://github.com/omg-services/intercom/blob/master/LICENSE).
+> Send message by email
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                                   |
+| :------------ | :------- | :------- | :------ | :-------------------------------------------- |
+| userId        | `string` | `true`   | None    | The user id that is created                   |
+| to            | `string` | `true`   | None    | The email address of user to send the message |
+| subject       | `string` | `true`   | None    | The subject of message                        |
+| body          | `string` | `true`   | None    | The body of message                           |
+| ACCESS_TOKEN  | `string` | `true`   | None    | Access token for intercom                     |
+
+```shell
+oms run emailMessage \
+    -a userId='*****' \
+    -a to='*****' \
+    -a subject='*****' \
+    -a body='*****' \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### inappMessage
+
+> Send message by inapp
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                        |
+| :------------ | :------- | :------- | :------ | :--------------------------------- |
+| from          | `int`    | `true`   | None    | The form argument will be Admin ID |
+| to            | `string` | `true`   | None    | The email address of receiver      |
+| body          | `string` | `true`   | None    | The body of message                |
+| ACCESS_TOKEN  | `string` | `true`   | None    | Access token for intercom          |
+
+```shell
+oms run inappMessage \
+    -a from='*****' \
+    -a to='*****' \
+    -a body='*****' \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+##### userMessage
+
+> Send message by user
+
+##### Action Arguments
+
+| Argument Name | Type     | Required | Default | Description                     |
+| :------------ | :------- | :------- | :------ | :------------------------------ |
+| email         | `string` | `true`   | None    | The object of sender with Email |
+| body          | `string` | `true`   | None    | The body of message             |
+| ACCESS_TOKEN  | `string` | `true`   | None    | Access token for intercom       |
+
+```shell
+oms run userMessage \
+    -a email='*****' \
+    -a body='*****' \
+    -e ACCESS_TOKEN=$ACCESS_TOKEN
+```
+
+## Contributing
+
+All suggestions in how to improve the specification and this guide are very welcome. Feel free share your thoughts in the
+Issue tracker, or even better, fork the repository to implement your own ideas and submit a pull request.
+
+[![Edit intercom on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/oms-services/intercom)
+
+This project is guided by [Contributor Covenant](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md).
+Please read out full [Contribution Guidelines](https://github.com/oms-services/.github/blob/master/CONTRIBUTING.md).
+
+## Additional Resources
+
+- [Install the CLI](https://github.com/microservices/oms) - The OMS CLI helps developers create, test, validate, and build
+  microservices.
+- [Example OMS Services](https://github.com/oms-services) - Examples of OMS-compliant services written in a variety of
+  languages.
+- [Example Language Implementations](https://github.com/microservices) - Find tooling & language implementations in Node,
+  Python, Scala, Java, Clojure.
+- [Storyscript Hub](https://hub.storyscript.io) - A public registry of OMS services.
+- [Community Chat](https://spectrum.chat/open-microservices) - Have ideas? Questions? Join us on Spectrum.
