@@ -1,15 +1,11 @@
-omg: 1
+oms: 1
 lifecycle:
   startup:
-    command: ['microservice-intercom']
+    command: ['intercom']
 info:
   version: 1.0.0
   title: Intercom
   description: This is an intercom service
-  contact:
-    name: Rohit Shetty
-    url: https://github.com/ht68rohit
-    email: rohits@heaptrace.com
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -26,16 +22,12 @@ actions:
         type: string
         in: requestBody
         required: true
-        help:
-          A unique string identifier for the user. It is required on creation if
-          an email is not supplied
+        help: A unique string identifier for the user. It is required on creation if an email is not supplied
       email:
         type: string
         in: requestBody
         required: true
-        help:
-          The user's email address. It is required on creation if a user_id is
-          not supplied.
+        help: The user's email address. It is required on creation if a user_id is not supplied.
       phone:
         type: string
         in: requestBody
@@ -50,9 +42,7 @@ actions:
         type: map
         in: requestBody
         required: false
-        help:
-          A hash of key/value pairs containing any other data about the user you
-          want Intercom to store
+        help: A hash of key/value pairs containing any other data about the user you want Intercom to store
     output:
       type: object
       contentType: application/json

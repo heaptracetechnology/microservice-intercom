@@ -1,7 +1,7 @@
 package main
 
 import (
-	route "github.com/heaptracetechnology/microservice-intercom/route"
+	route "github.com/oms-services/intercom/route"
 	"log"
 	"net/http"
 )
